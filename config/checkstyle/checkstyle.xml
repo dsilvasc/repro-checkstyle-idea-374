@@ -1,0 +1,339 @@
+<?xml version="1.0" encoding="us-ascii"?>
+<!DOCTYPE module PUBLIC "-//Puppy Crawl//DTD Check Configuration 1.3//EN" "http://www.puppycrawl.com/dtds/configuration_1_3.dtd">
+<!-- 
+   created by tengfei li and please feel free to config it to your own habit
+ -->
+<module name="Checker">
+  <!-- <property name="basedir" value="${basedir}"/> -->
+
+    <!-- Checks for whitespace                               -->
+    <!-- See http://checkstyle.sf.net/config_whitespace.html -->
+    <module name="FileTabCharacter"/>
+    <!-- 
+-->
+
+    <!--
+        Similar to checkstyle-rules.xml file in each section in the TreeWalker corresponds to a 
+        standard check group. Each check group should be properly referenced and sorted alphabetically.  
+     -->
+    <module name="TreeWalker">
+        <!-- https://stackoverflow.com/questions/4023185/how-to-disable-a-particular-checkstyle-rule-for-a-particular-line-of-code -->
+        <!-- Make the @SuppressWarnings annotations available to Checkstyle -->
+        <module name="SuppressWarningsHolder" />
+
+        <!-- http://checkstyle.sourceforge.net/config_filters.html#SuppressionCommentFilter -->
+        <module name="SuppressionCommentFilter"/>
+
+        <!-- Javadoc Conventions -->
+        <!-- See http://checkstyle.sf.net/config_javadoc.html -->
+        
+        <module name="JavadocMethod">
+          <property name="allowMissingJavadoc" value="true"/>
+          <property name="allowMissingPropertyJavadoc" value="true"/>
+          <property name="allowMissingParamTags" value="true"/>
+          <property name="allowMissingThrowsTags" value="true"/>
+          <property name="allowMissingReturnTag" value="true"/>
+          <property name="scope" value="public"/>
+        </module>
+        <module name="JavadocStyle"/>
+        <module name="JavadocType">
+          <property name="scope" value="public"/>
+        </module>
+        <module name="SingleLineJavadoc" />
+
+        <!-- Annotations -->
+        <!-- http://checkstyle.sourceforge.net/config_annotation.html -->
+
+        <module name="AnnotationLocation" />
+        <module name="AnnotationUseStyle" />
+        
+        <!-- Naming conventions -->
+        <!-- http://checkstyle.sourceforge.net/config_naming.html -->
+           
+        <module name="AbbreviationAsWordInName">
+          <property name="allowedAbbreviationLength" value="3" />
+          <property name="allowedAbbreviations" value="ID,XML,URL,HTML,RSP,FSN,JSON" />
+        </module>
+
+        <!-- Local final, non-final, and static variables must use standardized names -->
+        <module name="LocalFinalVariableName"/>
+        <module name="LocalVariableName"/>
+
+        <!-- Members and methods must use standardized names -->
+        <module name="MemberName"/>
+        <module name="MethodName"/>
+        <!-- Disallow uppercase letters and underscores in package names -->
+        <module name="PackageName">
+            <property name="format" value="^[a-z]+(\.[a-z][a-z0-9]*)*$"/>
+        </module>
+        <!-- Parameters must use standardized names -->
+        <module name="ParameterName"/>
+        <module name="StaticVariableName"/>
+        <!-- Classes and interfaces must use standardized names -->
+        <module name="TypeName"/>
+        
+        <!-- Import Configs -->
+        <!-- http://checkstyle.sourceforge.net/config_imports.html -->
+        
+        <module name="AvoidStarImport"/>
+        <!-- No duplicate/useless imports -->
+        <module name="RedundantImport"/>
+        <!-- No unused imports -->
+        <module name="UnusedImports"/>
+        <!-- Prevent use of Emory's backported collections -->
+        <module name="IllegalImport">
+            <property name="illegalPkgs" value="edu.emory.mathcs.backport, com.google.appengine.labs.repackaged, com.google.appengine.repackaged, jersey.repackaged"/>
+        </module>
+        
+        <!-- Checks for Size Violations.                    -->
+        <!-- See http://checkstyle.sf.net/config_sizes.html -->
+        
+        <!-- Disable rule that caps anon inner class length because it prevents definitions inside of factory methods -->
+        <!-- module name="AnonInnerLength">
+            <property name="max" value="30"/>
+        </module -->
+        <!-- Maximum number of executable statements in a method/block -->
+        <!-- this is likely overridden by settings in the Complexity section -->
+        <module name="ExecutableStatementCount">
+            <property name="max" value="70"/>
+        </module>
+        <!-- Limit lines to up to 120 chars (except comments) -->
+        <module name="LineLength">
+            <property name="max" value="120"/>
+            <property name="ignorePattern" value=".*//|.*/\*|\t* \*"/>
+        </module>
+        <!-- Limit number of methods in a class.  Default limit is 100. -->
+        <module name="MethodCount" />
+        <module name="MethodLength"/>
+        <module name="ParameterNumber"/>
+        
+        <!-- Whitespace Conventions -->
+        <!-- http://checkstyle.sourceforge.net/config_whitespace.html -->
+
+        <module name="GenericWhitespace"/>
+        <module name="NoLineWrap"/>
+
+        <module name="OperatorWrap">
+          <property name="option" value="nl"/>
+          <property name="tokens" value="COLON, EQUAL, NOT_EQUAL, DIV, PLUS, MINUS,
+            STAR, MOD, SR, BSR, GE, GT, SL, LE,
+            LT, BXOR, BOR, LOR, BAND, LAND,
+            TYPE_EXTENSION_AND, LITERAL_INSTANCEOF"/>
+        </module>
+        <module name="OperatorWrap">
+          <property name="option" value="eol" />
+          <property name="tokens" value="QUESTION" />
+        </module>
+
+        <module name="ParenPad" />
+
+        <module name="SeparatorWrap">
+          <property name="tokens" value="DOT"/>
+          <property name="tokens" value="AT"/>
+          <property name="option" value="nl"/>
+        </module>
+        <module name="SeparatorWrap">
+          <property name="tokens" value="COMMA"/>
+          <property name="tokens" value="RBRACK"/>
+          <property name="tokens" value="ARRAY_DECLARATOR"/>
+          <property name="tokens" value="ELLIPSIS"/>
+          <property name="tokens" value="SEMI"/>
+          <property name="option" value="EOL"/>
+        </module>
+
+        <!-- TODO: upgrade checkstyle -->
+        <!-- module name="SingleSpaceSeparator"/ -->
+
+        <!-- Forbid linebreaks after dot -->
+        <module name="NoWhitespaceAfter">
+            <property name="tokens" value="DOT"/>
+            <property name="allowLineBreaks" value="false"/>
+        </module>
+        <module name="ParenPad"/>
+        <!-- Require whitespace after commas and semi-colons -->
+        <module name="WhitespaceAfter">
+            <property name="tokens" value="COMMA, SEMI"/>
+        </module>
+        <module name="NoWhitespaceBefore"/>
+        <module name="TypecastParenPad"/>
+        <!-- Require whitespace around certain elements (literal if, for, etc.) -->
+        <module name="WhitespaceAround">
+            <property name="allowEmptyConstructors" value="true"/>
+            <property name="allowEmptyMethods" value="true"/>
+            <property
+                name="tokens"
+                value="ASSIGN, BAND, BAND_ASSIGN, BOR, BOR_ASSIGN, BSR,
+                    BSR_ASSIGN, BXOR, BXOR_ASSIGN, COLON, DIV, DIV_ASSIGN,
+                    EQUAL, GE, GT, LAND, LCURLY, LE, LITERAL_ASSERT,
+                    LITERAL_CATCH, LITERAL_DO, LITERAL_ELSE, LITERAL_FINALLY,
+                    LITERAL_FOR, LITERAL_IF, LITERAL_RETURN,
+                    LITERAL_SYNCHRONIZED, LITERAL_TRY, LITERAL_WHILE, LOR,
+                    LT, MINUS, MINUS_ASSIGN, MOD, MOD_ASSIGN, NOT_EQUAL,
+                    PLUS, PLUS_ASSIGN, QUESTION, RCURLY, SL, SLIST, SL_ASSIGN,
+                    SR, SR_ASSIGN, STAR, STAR_ASSIGN, TYPE_EXTENSION_AND"/>
+        </module>
+                
+        <!-- Modifier Checks                                    -->
+        <!-- See http://checkstyle.sf.net/config_modifiers.html -->       
+        
+        <!-- Enforce order of modifier keywords -->
+        <module name="ModifierOrder"/>
+        <!-- Redundant modifiers not allowed  -->
+        <module name="RedundantModifier"/>
+
+        <!-- Checks for blocks. You know, those {}'s         -->
+        <!-- See http://checkstyle.sf.net/config_blocks.html -->
+        
+        <!-- Prohibit nested/orphaned blocks -->
+        <module name="AvoidNestedBlocks"/>
+        <module name="EmptyBlock"/>
+        <!-- Left braces must be on end of line, but allow single-line methods -->
+        <module name="LeftCurly">
+            <property name="option" value="eol"/>
+            <property
+              name="tokens"
+              value="INTERFACE_DEF, CLASS_DEF, ANNOTATION_DEF, ENUM_DEF,
+                     ENUM_CONSTANT_DEF,
+                     LITERAL_WHILE, LITERAL_TRY, LITERAL_CATCH, LITERAL_FINALLY,
+                     LITERAL_SYNCHRONIZED, LITERAL_SWITCH, LITERAL_DO,
+                     LITERAL_IF, LITERAL_ELSE, LITERAL_FOR,
+                     STATIC_INIT, OBJBLOCK, LAMBDA" />
+        </module>
+        <module name="NeedBraces"/>
+        <!-- Right braces must be on the same line as the next statement, but allow single-line methods -->
+        <module name="RightCurly">
+            <property name="option" value="same"/>
+            <property
+              name="tokens"
+              value="LITERAL_TRY, LITERAL_CATCH, LITERAL_FINALLY,
+                     LITERAL_IF, LITERAL_ELSE" />
+        </module>
+                
+        <!-- Checks for common coding problems               -->
+        <!-- See http://checkstyle.sf.net/config_coding.html -->
+        
+        <module name="ArrayTrailingComma" />
+        <module name="CovariantEquals" />
+        <module name="DeclarationOrder" />
+
+        <!-- Make sure that 'default' comes last in Switch statements -->
+        <module name="DefaultComesLast"/>
+        <!-- Detect empty statements (hanging semicolons) -->
+        <module name="EmptyStatement"/>
+
+        <module name="EqualsAvoidNull" />
+
+        <!-- If you override equals(), you must override hashCode() -->
+        <module name="EqualsHashCode"/>
+        <!-- Avoid duplicate default initializations -->
+        <module name="ExplicitInitialization"/>
+
+        <module name="FinalLocalVariable">
+          <!-- TODO: upgrade checkstyle -->
+          <!-- property name="validateEnhancedForLoopVariable" value="true" / -->
+          <property name="tokens" value="VARIABLE_DEF,PARAMETER_DEF" />
+        </module>
+
+        <module name="HiddenField">
+          <property name="ignoreSetter" value="true"/>
+          <property name="ignoreConstructorParameter" value="true"/>
+          <property name="setterCanReturnItsClass" value="true" />
+        </module>
+
+        <module name="IllegalCatch" />
+
+        <module name="IllegalInstantiation">
+          <property name="classes" value="java.lang.Boolean" />
+        </module>
+
+        <module name="IllegalThrows" />
+
+        <module name="IllegalType" />
+
+        <module name="InnerAssignment"/>
+        <!-- Don't allow magic numbers to be embedded in code -->
+        <module name="MagicNumber"/>
+        <!-- Don't allow modification of loop control variables in-flight -->
+        <module name="ModifiedControlVariable"/>
+        <!-- Catch duplicate string literals scattered in a file -->
+        <module name="MultipleStringLiterals">
+            <!-- Exempt small utility strings, such as empty, comma delimiters, end quotes, etc -->
+            <!-- Currently exempt: ","__", "__"'"__"' "__"."__". " -->
+            <property name="ignoreStringsRegexp" value="^(&quot;[,'.]? ?&quot;)$"/>
+            <property name="allowedDuplicates" value="2"/>
+        </module>
+        <!-- Only one variable declaration per line -->
+        <module name="MultipleVariableDeclarations"/>
+
+        <module name="PackageDeclaration" />
+
+        <!-- Don't allow assignment to parameters inside a function -->
+        <module name="ParameterAssignment"/>
+        <!-- Limit max number of return statements per method -->
+        <module name="ReturnCount">
+            <property name="max" value="6"/>
+        </module>
+        <!-- Check for redundant boolean logic -->
+        <module name="SimplifyBooleanExpression"/>
+        <!-- Simplify boolean return statements -->
+        <module name="SimplifyBooleanReturn"/>
+        <!-- Block incorrect string equality checks -->
+        <module name="StringLiteralEquality"/>
+
+        <module name="UnnecessaryParentheses" />
+
+        <!-- Checks for class design                         -->
+        <!-- See http://checkstyle.sf.net/config_design.html -->
+        <module name="FinalClass"/>
+
+        <!-- disabling this one because utility class constructors are boilerplate -->
+        <!-- module name="HideUtilityClassConstructor"/ -->
+
+        <!-- Don't allow interfaces that only define constants -->
+        <module name="InterfaceIsType"/>                        
+        <!-- Don't allow public members -->
+        <module name="VisibilityModifier">
+            <property name="protectedAllowed" value="true"/>
+            <property name="packageAllowed" value="true"/>
+        </module>
+
+        <!-- Checks for different coding metrics              -->
+        <!-- See http://checkstyle.sf.net/config_metrics.html -->
+        
+        <!-- Limit boolean expression complexity -->
+        <module name="BooleanExpressionComplexity"/>
+        <!-- Limit class instantiation coupling to a manageable level -->
+        <module name="ClassDataAbstractionCoupling">
+            <property name="max" value="14"/>
+        </module>
+        <!-- Limit class dependence coupling -->
+        <module name="ClassFanOutComplexity">
+            <property name="max" value="30"/>
+        </module>
+        <!-- Limit cyclomatic complexity (number of alternate paths through a function) -->
+        <module name="CyclomaticComplexity"/>
+        <!-- Limit the number of statements in a method, class, file, etc -->
+        <module name="JavaNCSS"/>
+        <!-- Limit number of paths through a function (similar to Cyclomatic) -->
+        <module name="NPathComplexity"/>
+      
+        <!-- Miscellaneous other checks  -->
+        <!-- http://checkstyle.sourceforge.net/config_misc.html -->
+        
+        <!-- Enforce java-style array declarations -->
+        <module name="ArrayTypeStyle"/>
+        <!-- TODO: upgrade checkstyle -->
+        <!-- module name="CommentsIndentation" / -->
+        <module name="FinalParameters" />
+        <module name="Indentation"/>
+        <module name="OuterTypeFilename"/>
+        <module name="UpperEll"/>
+    </module>
+
+    <!-- Filter out Checkstyle warnings that have been suppressed with the @SuppressWarnings annotation -->
+    <module name="SuppressWarningsFilter" />
+
+    <module name="SuppressionFilter">
+      <property name="file" value="${config_loc}/suppressions.xml"/>
+    </module>
+</module>

@@ -12,3 +12,35 @@ gradle-app.setting
 
 # # Work around https://youtrack.jetbrains.com/issue/IDEA-116898
 # gradle/wrapper/gradle-wrapper.properties
+
+
+## IntelliJ
+## https://intellij-support.jetbrains.com/hc/en-us/articles/206544839
+## https://github.com/github/gitignore/blob/master/Global/JetBrains.gitignore
+# User-specific stuff:
+.idea/**/workspace.xml
+.idea/**/tasks.xml
+.idea/dictionaries
+# Sensitive or high-churn files:
+.idea/**/dataSources/
+.idea/**/dataSources.ids
+.idea/**/dataSources.xml
+.idea/**/dataSources.local.xml
+.idea/**/sqlDataSources.xml
+.idea/**/dynamic.xml
+.idea/**/uiDesigner.xml
+# Gradle-generated:
+.idea/**/gradle.xml
+.idea/**/libraries
+.idea/compiler.xml
+.idea/scala_compiler.xml
+.idea/vcs.xml
+.idea/modules.xml
+.idea/modules
+.idea/misc.xml
+.idea/kotlinc.xml
+## File-based project format:
+*.iws
+*.ipr
+*.iml
+
